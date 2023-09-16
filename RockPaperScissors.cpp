@@ -7,8 +7,20 @@ using namespace std;
 int main() {
     int playerChoice, computerChoice;
     int playerScore = 0, computerScore = 0;
-    const int roundsToPlay = 3;
+    int roundsToPlay = 3;
+    char answer;
+    //Choose the number of game rounds
+    cout << "Do you want to choose the number of rounds?" << end1;
+    cout << "If the answer is yes, type y, otherwise type n" << end1;
+    if (answer==y)
+       {
+         cin  >> answer;
+         roundsToPlay=answer;
+       
+       }
 
+
+    
     // Seed the random number generator
     srand(time(0));
 
