@@ -1,8 +1,22 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <thread>
+#include <chrono>
 
 using namespace std;
+// Function to read val from cin with a time limit
+int getVal( )
+{
+    int val=0;
+    std::thread t1([&](){
+        std::cin>>val;
+    });
+    std::this_thread::sleep_for(std::chrono::seconds(7));
+    t1.detach();
+
+    return val;
+}
 
 int main() {
     int playerChoice, computerChoice;
@@ -11,7 +25,9 @@ int main() {
     char answer;
     //Choose the number of game rounds
     cout << "Do you want to choose the number of rounds?" << end1;
-    cout << "If the answer is yes, type y, otherwise type n" << end1;
+    cout << "If the answer is yes, type y, otherwise type n." << end1;
+
+    
     if (answer==y)
        {
          cin  >> answer;
@@ -26,8 +42,11 @@ int main() {
 
     for (int round = 1; round <= roundsToPlay; ++round) {
         cout << "Round " << round << endl;
-        cout << "Choose (1) Rock, (2) Paper, or (3) Scissors: ";
-        cin >> playerChoice;
+        cout << "Choose (1) Rock, (2) Paper, or (3) Scissors: "<< end1;
+            cout << "You only have 7 seconds." << end1;
+       // Add a timer (7 seconds) before the next round
+
+        playerChoice=getVal( );
 
         // Generate a random computer choice (1-3)
         computerChoice = rand() % 3 + 1;
